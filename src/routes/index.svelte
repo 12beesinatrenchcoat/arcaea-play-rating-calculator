@@ -3,13 +3,14 @@
 </svelte:head>
 
 <script>
-	// let graph;
+	let graph;
 	let difficulties;
 
 	export let x;
-	export let y = 30;
+	export let y;
 
-	export let songTitle = "Choose a song…";
+	export let selectedSong = "Choose a song…";
+	export let songTitle = "";
 	export let song = {
 		artist: "there is no song here",
 		pack: "nonexistent",
@@ -23,12 +24,13 @@
 		charter: "no",
 	}
 
-	export let score = 8.6e6;
-	export let scoreModifier = -3;
+	export let score;
+	export let scoreModifier;
 	export let pure = 0;
 	export let lost;
 
-	import songs from "$lib/assets/charts.json"
+	import packs from "$lib/assets/charts.json"
+	console.log(packs);
 
 	$: {
 		lost = difficulty.notes - pure;
@@ -51,8 +53,10 @@
 
 
 	// Song change!
-	$: if (songTitle !== "Choose a song…") {
-		song = songs[songTitle];
+	$: if (selectedSong !== "Choose a song…") {
+		const data = JSON.parse(selectedSong);
+		songTitle = data[1];
+		song = packs[data[0]][data[1]];
 		if (!song.difficulties[difficulties]) {
 			difficulties = "";
 			difficulty = {
@@ -91,9 +95,13 @@
 <p>This is a fanmade project. It is unaffiliated with Arcaea and lowiro. Arcaea belongs to lowiro.</p>
 <label>
 	Song
-	<select id="song-select" bind:value={songTitle}>
-		{#each Object.keys(songs) as song}
-			<option>{song}</option>
+	<select id="song-select" bind:value={selectedSong}>
+		{#each Object.entries(packs) as [pack, songs]}
+			<optgroup label={pack}>
+				{#each Object.keys(songs) as song}
+					<option value='{`["${pack}","${song}"]`}'>{song}</option>
+				{/each}
+			</optgroup>
 		{/each}
 	</select>
 </label>
@@ -134,7 +142,8 @@
 <p>ptt: {Math.max((difficulty.constant + scoreModifier), 0.0).toFixed(2)}</p>
 <input type='range' id='pure-slider' name='pure' bind:value={pure} step='1'
 			 min={Math.max(Math.floor(difficulty.notes * 0.72), 0)} max={difficulty.notes}>
-<svg id='chart' viewBox='0 0 160, 70'>
+
+<svg id='chart' viewBox='0 0 160, 70' bind:this={graph}>
 	<style>
 		polyline {
 				stroke: black;
@@ -148,6 +157,6 @@
 	<polyline points='0,70 130,20'/>
 	<polyline points='130,20 150,10'/>
 	<polyline class='dotted' points='150,10 160,10'/>
-	<circle id='point' r='1' cx={x} cy={y}/>
+	<circle id='point' r='1.5' cx={x} cy={y}/>
 </svg>
 

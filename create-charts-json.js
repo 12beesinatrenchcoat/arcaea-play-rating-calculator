@@ -6,7 +6,7 @@ import {fileURLToPath} from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const songList = {};
+const packList = {};
 
 async function getCSVObject() {
 	const response = await fetch("https://gist.githubusercontent.com/12beesinatrenchcoat/1bb2081eb2d6857254f06d3cf228e0c9/raw/")
@@ -14,11 +14,13 @@ async function getCSVObject() {
 		.on("data", async row => {
 			const {title, artist, length, difficulty, level, notes, constant, charter, bpm, side, pack, version} = row;
 
-			songList[title] ??= {artist, length, pack, bpm, side, version};
+			packList[pack] ??= {};
 
-			songList[title].difficulties = songList[title].difficulties || {};
+			packList[pack][title] ??= {artist, length, pack, bpm, side, version};
 
-			songList[title].difficulties[difficulty] = {
+			packList[pack][title].difficulties = packList[pack][title].difficulties || {};
+
+			packList[pack][title].difficulties[difficulty] = {
 				level,
 				notes: Number(notes),
 				constant: Number(constant),
@@ -29,7 +31,7 @@ async function getCSVObject() {
 		})
 		.on("end", rowCount => {
 			console.log(`Parsed ${rowCount} rows`);
-			writeFile(__dirname + "/src/lib/assets/charts.json", JSON.stringify(songList), err => {
+			writeFile(__dirname + "/src/lib/assets/charts.json", JSON.stringify(packList), err => {
 				if (err) {
 					throw err;
 				}
