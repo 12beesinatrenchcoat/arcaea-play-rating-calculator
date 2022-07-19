@@ -1,7 +1,7 @@
 # originally stolen from https://jekyllrb.com/docs/continuous-integration/github-actions/
 # <3
 
-name: Build and deploy Jekyll site to GitHub Pages
+name: Build site and commit to gh-pages branch
 
 on:
   push:

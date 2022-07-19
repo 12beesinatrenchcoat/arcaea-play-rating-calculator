@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Arcaea Potential Calculator</title>
+	<title>Arcaea Play Rating Calculator</title>
 </svelte:head>
 
 <script>
@@ -88,7 +88,7 @@
 	}
 </script>
 
-<h1>Arcaea Potential Calculator</h1>
+<h1>Arcaea Play Rating Calculator</h1>
 <a href='https://github.com/12beesinatrenchcoat/arcaea-potential-calculator'>Source Code</a>
 <a href='https://arcaea.fandom.com/'>Arcaea Community Wiki</a>
 <p>This is a fanmade project. It is unaffiliated with Arcaea and lowiro. Arcaea belongs to lowiro.</p>

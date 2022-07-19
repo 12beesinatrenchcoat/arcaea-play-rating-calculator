@@ -1,4 +1,4 @@
-# arcaea-potential-calculator
+# arcaea-play-rating-calculator
 A little web thing that calculates the play rating of any given play in Arcaea (the New Dimension Rhythm Game).
 
 Also an excuse to play around with [Svelte](https://svelte.dev).
