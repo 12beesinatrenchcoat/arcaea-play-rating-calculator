@@ -4,7 +4,7 @@
 
 <script>
 	let graph;
-	let difficulties;
+	let selectedDifficulty;
 
 	export let x;
 	export let y;
@@ -56,20 +56,19 @@
 		const data = JSON.parse(selectedSong);
 		songTitle = data[1];
 		song = packs[data[0]][data[1]];
-		if (!song.difficulties[difficulties]) {
-			difficulties = "";
-			difficulty = {
-				level: "no",
-				notes: 1,
-				constant: 0,
-				charter: "no",
-			}
+		const {difficulties} = song;
+
+		if(
+			(selectedDifficulty && !difficulties[selectedDifficulty])
+			|| Object.keys(difficulties).length === 1
+		) {
+			selectedDifficulty = Object.keys(difficulties)[0];
 		}
 	}
 
 	// Difficulty change!
-	$: if (song.difficulties && difficulties) {
-		difficulty = song.difficulties[difficulties];
+	$: if (song.difficulties && selectedDifficulty) {
+		difficulty = song.difficulties[selectedDifficulty];
 	}
 
 	/**
@@ -105,19 +104,19 @@
 	</select>
 </label>
 <label>
-	<input type="radio" bind:group={difficulties} name="difficulty" value="past" disabled={!song.difficulties.past}>
+	<input type="radio" bind:group={selectedDifficulty} name="difficulty" value="past" disabled={!song.difficulties.past}>
 	PAST
 </label>
 <label>
-	<input type="radio" bind:group={difficulties} name="difficulty" value="present" disabled={!song.difficulties.present}>
+	<input type="radio" bind:group={selectedDifficulty} name="difficulty" value="present" disabled={!song.difficulties.present}>
 	PRESENT
 </label>
 <label>
-	<input type="radio" bind:group={difficulties} name="difficulty" value="future" disabled={!song.difficulties.future}>
+	<input type="radio" bind:group={selectedDifficulty} name="difficulty" value="future" disabled={!song.difficulties.future}>
 	FUTURE
 </label>
 <label>
-	<input type="radio" bind:group={difficulties} name="difficulty" value="beyond" disabled={!song.difficulties.beyond}>
+	<input type="radio" bind:group={selectedDifficulty} name="difficulty" value="beyond" disabled={!song.difficulties.beyond}>
 	BEYOND
 </label>
 
