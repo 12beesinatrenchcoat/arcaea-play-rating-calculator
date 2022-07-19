@@ -30,7 +30,6 @@
 	export let lost;
 
 	import packs from "$lib/assets/charts.json"
-	console.log(packs);
 
 	$: {
 		lost = difficulty.notes - pure;
