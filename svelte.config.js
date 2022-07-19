@@ -10,7 +10,7 @@ const config = {
 			default: true
 		},
 		paths: {
-			base: dev ? "" : "/arcaea-potential-calculator",
+			base: dev ? "" : "/arcaea-play-rating-calculator",
 		},
 	}
 };
