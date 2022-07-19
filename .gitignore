@@ -7,4 +7,4 @@ node_modules
 .env.*
 !.env.example
 charts.csv
-charts.json
+/src/lib/assets/charts.json
