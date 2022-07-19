@@ -1,10 +1,6 @@
 import * as csv from "@fast-csv/parse"
 import fetch from "node-fetch";
 import {writeFile} from "node:fs";
-import {dirname} from "node:path";
-import {fileURLToPath} from "node:url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const packList = {};
 const packOrder = {
@@ -81,7 +77,7 @@ async function getCSVObject() {
 				{}
 			);
 
-			writeFile(__dirname + "/src/lib/assets/charts.json", JSON.stringify(sortedPackList), err => {
+			writeFile("./src/lib/assets/charts.json", JSON.stringify(sortedPackList), err => {
 				if (err) {
 					throw err;
 				}
