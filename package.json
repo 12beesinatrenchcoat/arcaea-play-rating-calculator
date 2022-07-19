@@ -1,5 +1,5 @@
 {
-	"name": "arcaea-potential-calculator",
+	"name": "arcaea-play-rating-calculator",
 	"version": "0.0.1",
 	"private": true,
 	"prettier": "prettier-config-xo",
