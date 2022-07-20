@@ -9,7 +9,7 @@
 	export let x;
 	export let y;
 
-	export let selectedSong = "Choose a song…";
+	export let selectedSong;
 	export let songTitle = "";
 	export let song = {
 		artist: "there is no song here",
@@ -31,9 +31,11 @@
 
 	import packs from "$lib/assets/charts.json"
 
+	$: lost = difficulty.notes - pure;
+
+	$: score = Math.ceil((pure / difficulty.notes) * 10e6)
+
 	$: {
-		lost = difficulty.notes - pure;
-		score = Math.ceil((pure / difficulty.notes) * 10e6)
 		if (score >= 10e6) {
 			scoreModifier = 2;
 		} else if (score > 9.8e6) {
@@ -41,7 +43,9 @@
 		} else {
 			scoreModifier = (score - 9.5e6) / 0.3e6;
 		}
+	}
 
+	$: {
 		x = ((score - 8.6e6) / 1.4e6) * 150;
 		if (score <= 9.8e6) {
 			y = 70 - (x / 130 * 50)
@@ -50,9 +54,8 @@
 		}
 	}
 
-
 	// Song change!
-	$: if (selectedSong !== "Choose a song…") {
+	$: if (selectedSong) {
 		const data = JSON.parse(selectedSong);
 		songTitle = data[1];
 		song = packs[data[0]][data[1]];
@@ -61,14 +64,21 @@
 		if(
 			(selectedDifficulty && !difficulties[selectedDifficulty])
 			|| Object.keys(difficulties).length === 1
+			|| !selectedDifficulty
 		) {
 			selectedDifficulty = Object.keys(difficulties)[0];
 		}
+
+		changeDifficulty();
 	}
 
 	// Difficulty change!
-	$: if (song.difficulties && selectedDifficulty) {
-		difficulty = song.difficulties[selectedDifficulty];
+	function changeDifficulty() {
+		const oldPercent = pure / difficulty.notes;
+		if (song.difficulties && selectedDifficulty) {
+			difficulty = song.difficulties[selectedDifficulty];
+			pure = Math.round(oldPercent * difficulty.notes)
+		}
 	}
 
 	/**
@@ -104,19 +114,19 @@
 	</select>
 </label>
 <label>
-	<input type="radio" bind:group={selectedDifficulty} name="difficulty" value="past" disabled={!song.difficulties.past}>
+	<input type="radio" on:change={changeDifficulty} bind:group={selectedDifficulty} name="difficulty" value="past" disabled={!song.difficulties.past}>
 	PAST
 </label>
 <label>
-	<input type="radio" bind:group={selectedDifficulty} name="difficulty" value="present" disabled={!song.difficulties.present}>
+	<input type="radio" on:change={changeDifficulty} bind:group={selectedDifficulty} name="difficulty" value="present" disabled={!song.difficulties.present}>
 	PRESENT
 </label>
 <label>
-	<input type="radio" bind:group={selectedDifficulty} name="difficulty" value="future" disabled={!song.difficulties.future}>
+	<input type="radio" on:change={changeDifficulty} bind:group={selectedDifficulty} name="difficulty" value="future" disabled={!song.difficulties.future}>
 	FUTURE
 </label>
 <label>
-	<input type="radio" bind:group={selectedDifficulty} name="difficulty" value="beyond" disabled={!song.difficulties.beyond}>
+	<input type="radio" on:change={changeDifficulty} bind:group={selectedDifficulty} name="difficulty" value="beyond" disabled={!song.difficulties.beyond}>
 	BEYOND
 </label>
 
