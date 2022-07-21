@@ -5,6 +5,16 @@
 body
 	max-width: min(96ch, 95vw)
 	margin: 2em auto
+	background: #eeeeee
+
+@media (prefers-color-scheme: dark)
+	body
+		background: black
+		color: white
+	a
+		color: inherit
+	#grade
+		filter: contrast(0.8) saturate(2) brightness(1.25)
 
 body, .flow
 	> * + *
@@ -24,7 +34,7 @@ body, .flow
 	margin-right: 4ch
 
 #select-menu
-	background: #c4c4c4
+	background: #8888
 	padding: 0.5em
 
 #difficulty-select
@@ -119,7 +129,7 @@ input[value="future"]
 	color: transparent
 
 	&[data-grade="D"]
-		background-image: linear-gradient(black, crimson)
+		background-image: linear-gradient(#111, crimson)
 	&[data-grade="C"]
 		background-image: linear-gradient(#201, #a0a)
 	&[data-grade="B"]

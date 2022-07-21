@@ -192,9 +192,12 @@
 <svg id='chart' viewBox='0 0 160, 70' bind:this={graph}>
 	<style>
 		polyline {
-				stroke: black;
+				stroke: currentColor;
 				stroke-width: 2;
 				vector-effect: non-scaling-stroke;
+		}
+		circle {
+				fill: currentColor;
 		}
 		.dotted {
 				stroke-dasharray: 4;
