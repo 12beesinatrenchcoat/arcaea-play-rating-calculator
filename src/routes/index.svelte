@@ -102,7 +102,11 @@
 		const oldPercent = pure / difficulty.notes;
 		if (song.difficulties && selectedDifficulty) {
 			difficulty = song.difficulties[selectedDifficulty];
-			pure = Math.round(oldPercent * difficulty.notes)
+			if (pure === 0) {
+				pure = Math.floor(0.83 * difficulty.notes)
+			} else {
+				pure = Math.round(oldPercent * difficulty.notes)
+			}
 		}
 	}
 
@@ -121,6 +125,8 @@
 		return output;
 	}
 </script>
+
+<svelte:window on:load={changeDifficulty}/>
 
 <h1>Arcaea Play Rating Calculator</h1>
 <a href='https://github.com/12beesinatrenchcoat/arcaea-potential-calculator'>Source Code</a>
@@ -163,7 +169,7 @@
 	<div class='flow'>
 		<div id='song-info'>
 			<p>{song.pack}</p>
-			<h2>{songTitle}</h2>
+			<h2 id='song-title'>{songTitle}</h2>
 			<p>{song.artist}</p>
 			<p>BPM: {song.bpm}</p>
 		</div>
@@ -180,9 +186,9 @@
 	<p>ptt: {Math.max((difficulty.constant + scoreModifier), 0.0).toFixed(2)} ({difficulty.constant.toFixed(2)} + {scoreModifier.toFixed(2)})</p>
 </div>
 
-<span bind:this={pureLostDisplay}>PURE: {pure} / LOST: {lost}</span>
+<span bind:this={pureLostDisplay}>PURE: {pure} / LOST: {lost}</span><br>
 <input type='range' id='pure-slider' name='pure' bind:value={pure} step='1'
-			 min={Math.max(Math.floor(difficulty.notes * 0.8), 0)} max={difficulty.notes}>
+			 min={Math.max(Math.floor(difficulty.notes * 0.83), 0)} max={difficulty.notes}>
 <svg id='chart' viewBox='0 0 160, 70' bind:this={graph}>
 	<style>
 		polyline {
