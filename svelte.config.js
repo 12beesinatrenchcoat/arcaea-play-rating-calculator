@@ -1,4 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
+import preprocess from "svelte-preprocess";
 
 const dev = "production" === "development";
 
@@ -12,7 +13,8 @@ const config = {
 		paths: {
 			base: dev ? "" : "/arcaea-play-rating-calculator",
 		},
-	}
+	},
+	preprocess: preprocess({})
 };
 
 export default config;

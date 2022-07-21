@@ -1,0 +1,136 @@
+*, *:before, *:after
+	box-sizing: border-box
+	font-family: "Titillium Web", sans-serif
+
+body
+	max-width: 96ch
+	margin: 2em auto
+
+body, .flow
+	> * + *
+		margin-top: 1em
+
+@media screen and (max-width: 100ch)
+	body
+		margin: 2em 2ch
+
+#pure-slider
+	width: 100%
+
+
+.two-column
+	display: flex
+	flex-direction: row
+	justify-content: flex-start
+	flex-wrap: wrap
+
+
+.two-column > :last-child
+	margin-left: 4ch
+
+#select-menu
+	background: #c4c4c4
+	padding: 0.5em
+
+#difficulty-select
+	display: flex
+	flex-direction: row
+	justify-content: space-evenly
+	> label
+		width: 5em
+		max-width: 22.5%
+		height: 6em
+		display: inline-flex
+		flex-direction: column
+		align-items: center
+		text-align: center
+		padding: 0.5em
+		position: relative
+		> *
+			display: block
+			cursor: pointer
+
+input[type="radio"]
+	-webkit-appearance: none
+	appearance: none
+	background-color: inherit
+	margin: 0
+	position: relative
+	width: 4em
+	height: 4em
+
+	&::before, &::after
+		display: inline-block
+		position: absolute
+
+
+	&::before
+		content: url('$lib/assets/difficulty-icon.svg')
+		width: 4em
+		height: 4em
+		left: calc(50% - 2em)
+
+	&:checked::before
+		filter: drop-shadow(0 0 4px currentColor) brightness(2) saturate(200%)
+
+	&:disabled
+		cursor: not-allowed !important
+		&::before
+			filter: brightness(1.5) grayscale(100%) opacity(50%)
+
+	&::after
+		content: attr(data-level)
+		font-family: "Exo", sans-serif
+		display: flex
+		align-items: center
+		justify-content: center
+		font-size: 2em
+		width: 100%
+		height: 100%
+		text-align: center
+		vertical-align: middle
+		color: white
+
+input[value="past"]
+	filter: hue-rotate(210deg)
+
+input[value="present"]
+	filter: hue-rotate(120deg)
+
+input[value="future"]
+	filter: hue-rotate(280deg)
+
+#song-info, #diff-info, #stats
+	> *
+		margin: 0
+
+#result
+	font-family: "Exo", sans-serif
+	font-size: 2em
+	> *
+		font-family: inherit
+
+#score
+	width: 8.5ch
+	display: inline-block
+
+#grade
+	-webkit-background-clip: text
+	background-clip: text
+	color: transparent
+
+	&[data-grade="D"]
+		background-image: linear-gradient(black, crimson)
+	&[data-grade="C"]
+		background-image: linear-gradient(#201, #a0a)
+	&[data-grade="B"]
+		background-image: linear-gradient(#412, #b2b)
+	&[data-grade="A"]
+		background-image: linear-gradient(#413, #b3b)
+	&[data-grade="AA"]
+		background-image: linear-gradient(#523, #d4b)
+	&[data-grade="EX"]
+		background-image: linear-gradient(#737, #4ad)
+	&[data-grade="EX+"]
+		background-image: linear-gradient(#848, #5af)
+

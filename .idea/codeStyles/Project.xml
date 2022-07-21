@@ -58,6 +58,7 @@
     </codeStyleSettings>
     <codeStyleSettings language="SASS">
       <indentOptions>
+        <option name="TAB_SIZE" value="2" />
         <option name="USE_TAB_CHARACTER" value="true" />
       </indentOptions>
     </codeStyleSettings>
