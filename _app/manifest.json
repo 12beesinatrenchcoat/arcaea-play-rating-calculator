@@ -4,7 +4,7 @@
     "src": "src/lib/assets/difficulty-icon.svg"
   },
   ".svelte-kit/runtime/client/start.js": {
-    "file": "immutable/start-5cfa3502.js",
+    "file": "immutable/start-064ef954.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -35,7 +35,7 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "immutable/pages/index.svelte-3875f286.js",
+    "file": "immutable/pages/index.svelte-fd19dde5.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -43,7 +43,7 @@
       "_index-d4433aff.js"
     ],
     "css": [
-      "immutable/assets/index-6d3fee2b.css"
+      "immutable/assets/index-016c2a3c.css"
     ],
     "assets": [
       "immutable/assets/difficulty-icon-f036b242.svg"
@@ -53,7 +53,7 @@
     "file": "immutable/chunks/index-d4433aff.js"
   },
   "src/routes/index.css": {
-    "file": "immutable/assets/index-6d3fee2b.css",
+    "file": "immutable/assets/index-016c2a3c.css",
     "src": "src/routes/index.css"
   }
 }
