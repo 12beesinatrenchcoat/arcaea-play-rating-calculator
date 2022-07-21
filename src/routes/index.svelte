@@ -174,6 +174,7 @@
 			<p>BPM: {song.bpm}</p>
 		</div>
 		<div id='diff-info'>
+			<p id="difficulty" class={selectedDifficulty}>{(selectedDifficulty || "").toUpperCase()}</p>
 			<p>Level: {difficulty.level} (constant {difficulty.constant.toFixed(1)})</p>
 			<p>Note count: {difficulty.notes}</p>
 			<p>Note design: {difficulty.charter}</p>
@@ -206,6 +207,7 @@
 	<polyline points='0,70 130,20'/>
 	<polyline points='130,20 150,10'/>
 	<polyline class='dotted' points='150,10 160,10'/>
+	<polyline class='dotted' points='130,0 130,70'/>
 	<circle id='point' r='1.5' cx={x} cy={y}/>
 </svg>
 
