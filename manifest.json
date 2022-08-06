@@ -1,14 +1,14 @@
 {
   "src/lib/assets/difficulty-icon.svg": {
-    "file": "immutable/assets/difficulty-icon-f036b242.svg",
+    "file": "_app/immutable/assets/difficulty-icon-f036b242.svg",
     "src": "src/lib/assets/difficulty-icon.svg"
   },
   ".svelte-kit/runtime/client/start.js": {
-    "file": "immutable/start-064ef954.js",
+    "file": "_app/immutable/start-a0b7b3d8.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
-      "_index-d4433aff.js"
+      "_index-dfcfd110.js"
     ],
     "dynamicImports": [
       ".svelte-kit/runtime/components/layout.svelte",
@@ -17,43 +17,43 @@
     ]
   },
   ".svelte-kit/runtime/components/layout.svelte": {
-    "file": "immutable/layout.svelte-5ef49c87.js",
+    "file": "_app/immutable/layout.svelte-fcebe3e4.js",
     "src": ".svelte-kit/runtime/components/layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-d4433aff.js"
+      "_index-dfcfd110.js"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
-    "file": "immutable/error.svelte-02096020.js",
+    "file": "_app/immutable/error.svelte-b6e4a273.js",
     "src": ".svelte-kit/runtime/components/error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-d4433aff.js"
+      "_index-dfcfd110.js"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "immutable/pages/index.svelte-fd19dde5.js",
+    "file": "_app/immutable/pages/index.svelte-e43e39e6.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-d4433aff.js"
+      "_index-dfcfd110.js"
     ],
     "css": [
-      "immutable/assets/index-016c2a3c.css"
+      "_app/immutable/assets/index-016c2a3c.css"
     ],
     "assets": [
-      "immutable/assets/difficulty-icon-f036b242.svg"
+      "_app/immutable/assets/difficulty-icon-f036b242.svg"
     ]
   },
-  "_index-d4433aff.js": {
-    "file": "immutable/chunks/index-d4433aff.js"
+  "_index-dfcfd110.js": {
+    "file": "_app/immutable/chunks/index-dfcfd110.js"
   },
   "src/routes/index.css": {
-    "file": "immutable/assets/index-016c2a3c.css",
+    "file": "_app/immutable/assets/index-016c2a3c.css",
     "src": "src/routes/index.css"
   }
 }
