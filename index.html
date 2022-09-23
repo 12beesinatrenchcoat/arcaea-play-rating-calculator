@@ -12,6 +12,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="content-security-policy" content=""><title>Arcaea Play Rating Calculator</title>
 	<link href="/arcaea-play-rating-calculator/_app/immutable/assets/_layout-a9c424e0.css" rel="stylesheet">
+	<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/start-4b407971.js">
+	<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/index-558cd723.js">
+	<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/singletons-0c987a21.js">
+	<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/components/pages/_layout.svelte-68913262.js">
+	<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/modules/pages/_layout.js-542205c4.js">
+	<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/_layout-60ced57c.js">
+	<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/components/pages/_page.svelte-192aa7fe.js">
 	</head>
 	<body>
 		
@@ -42,9 +49,9 @@
 			<label><input type="radio" name="difficulty" data-level="" value="beyond" disabled>
 				BEYOND
 			</label></div></div>
-	<div class="flow"><div id="song-info"><p>nonexistent</p>
+	<div class="flow"><div id="song-info"><p>whoops</p>
 			<h2 id="song-title">if you're seeing, this, something probably went wrong</h2>
-			<p>there is no song here</p>
+			<p>or just wait a bit, maybe it's loading</p>
 			<p>BPM: 5?</p></div>
 		<div id="diff-info"><p id="difficulty"></p>
 			<p>Level: no (constant 0.0)</p>
@@ -70,5 +77,25 @@
 	</style><polyline points="0,70 130,20"></polyline><polyline points="130,20 150,10"></polyline><polyline class="dotted" points="150,10 160,10"></polyline><polyline class="dotted" points="130,0 130,70"></polyline><circle id="point" r="1.5" cx="-921.4285714285714" cy="424.3956043956044"></circle></svg>
 
 
+		<script type="module" data-sveltekit-hydrate="d6ml0y">
+		import { start } from "/arcaea-play-rating-calculator/_app/immutable/start-4b407971.js";
+
+		start({
+			env: {},
+			hydrate: {
+				status: 200,
+				error: null,
+				node_ids: [0, 2],
+				params: {},
+				routeId: "",
+				data: (function(a){return [a,a]}(null)),
+				form: null
+			},
+			paths: {"base":"/arcaea-play-rating-calculator","assets":"/arcaea-play-rating-calculator"},
+			target: document.querySelector('[data-sveltekit-hydrate="d6ml0y"]').parentNode,
+			trailing_slash: "never"
+		});
+	</script>
+	
 	</body>
 </html>
