@@ -38,8 +38,8 @@
 	let selectedDifficulty: "past" | "present" | "future" | "beyond";
 	export let songTitle = "if you're seeing, this, something probably went wrong";
 	export let song: Song = {
-		artist: "there is no song here",
-		pack: "nonexistent",
+		artist: "or just wait a bit, maybe it's loading",
+		pack: "whoops",
 		bpm: "5?",
 		length: "no",
 		side: "Colorless",
