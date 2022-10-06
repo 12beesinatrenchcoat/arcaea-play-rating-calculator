@@ -30,6 +30,7 @@ const packOrder = {
 	"WACCA Collaboration": 18,
 	"maimai Collaboration": 19,
 	"O.N.G.E.K.I. Collaboration": 20,
+	"O.N.G.E.K.I. Collaboration Chapter 2": 20.1,
 	"CHUNITHM Collaboration": 21,
 	"CHUNITHM Collaboration Chapter 2": 21.1,
 	"Groove Coaster Collaboration": 22,
