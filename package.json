@@ -9,7 +9,6 @@
 		"build": "vite build",
 		"package": "svelte-kit package",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync",
 		"check": "svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./jsconfig.json --watch",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
@@ -32,7 +31,7 @@
 		"svelte-check": "^2.8.0",
 		"svelte-preprocess": "^4.10.7",
 		"typescript": "^4.7.4",
-		"undici": "^5.7.0",
+		"undici": "^5.8.2",
 		"vite": "^3.0.0"
 	},
 	"type": "module"

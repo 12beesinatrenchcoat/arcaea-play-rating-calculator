@@ -2,45 +2,66 @@
 	<title>Arcaea Play Rating Calculator</title>
 </svelte:head>
 
-<style lang='sass' global>
-	@import "../app.sass"
-</style>
+<script lang="ts">
+	interface Difficulty {
+		level: string
+		notes: number
+		constant: number
+		charter: string
+	}
 
-<script>
-	let graph;
-	let selectedDifficulty;
+	interface Song {
+		artist: string
+		length: string
+		pack: string
+		bpm: string
+		side: "Light" | "Conflict" | "Colorless"
+		version: string
+		difficulties: {
+			past?: Difficulty
+			present?: Difficulty
+			future?: Difficulty
+			beyond?: Difficulty
+		}
+	}
 
-	export let x;
-	export let y;
+	import packs from "$lib/assets/charts.json"
 
-	export let selectedSong;
-	export let songTitle = "";
-	export let song = {
-		artist: "there is no song here",
-		pack: "nonexistent",
+	// Position of point on graph.
+	export let x: number;
+	export let y: number;
+
+	/**
+	 * Actually a stringified table. [pack: string, songTitle: string]
+	*/
+	export let selectedsong: string;
+	let selectedDifficulty: "past" | "present" | "future" | "beyond";
+	export let songTitle = "if you're seeing, this, something probably went wrong";
+	export let song: Song = {
+		artist: "or just wait a bit, maybe it's loading",
+		pack: "whoops",
 		bpm: "5?",
+		length: "no",
+		side: "Colorless",
+		version: "-2",
 		difficulties: {},
 	};
-	export let difficulty = {
+	export let Difficulty: Difficulty = {
 		level: "no",
 		notes: 1,
 		constant: 0,
 		charter: "no",
 	}
 
-	export let score;
-	export let grade;
-	export let scoreModifier;
+	export let score: number;
+	export let grade: "EX+" | "EX" | "AA" | "A" | "B" | "C" | "D";
+	export let scoreModifier: number;
 	export let pure = 0;
-	export let lost;
+	export let lost: number;
 
-	let pureLostDisplay;
+	$: lost = Difficulty.notes - pure;
 
-	import packs from "$lib/assets/charts.json"
-
-	$: lost = difficulty.notes - pure;
-
-	$: score = Math.ceil((pure / difficulty.notes) * 10e6)
+	$: score = Math.ceil((pure / Difficulty.notes) * 10e6)
 
 	$: {
 		if (score >= 10e6) {
@@ -80,10 +101,14 @@
 	}
 
 	// Song change!
-	$: if (selectedSong) {
-		const data = JSON.parse(selectedSong);
+	$: if (selectedsong) {
+		const data = JSON.parse(selectedsong) as [
+			pack: keyof typeof packs, 
+			songTitle: string
+		]
 		songTitle = data[1];
-		song = packs[data[0]][data[1]];
+		const pack = packs[data[0]]
+		song = pack[data[1] as keyof typeof pack];
 		const {difficulties} = song;
 
 		if(
@@ -91,7 +116,8 @@
 			|| Object.keys(difficulties).length === 1
 			|| !selectedDifficulty
 		) {
-			selectedDifficulty = Object.keys(difficulties)[0];
+			// Set difficulty to first difficulty if none chosen
+			selectedDifficulty = Object.keys(difficulties)[0] as "past" | "present" | "future" | "beyond";
 		}
 
 		changeDifficulty();
@@ -99,13 +125,13 @@
 
 	// Difficulty change!
 	function changeDifficulty() {
-		const oldPercent = pure / difficulty.notes;
+		const oldPercent = pure / Difficulty.notes;
 		if (song.difficulties && selectedDifficulty) {
-			difficulty = song.difficulties[selectedDifficulty];
+			Difficulty = song.difficulties[selectedDifficulty]!;
 			if (pure === 0) {
-				pure = Math.floor(0.83 * difficulty.notes)
+				pure = Math.floor(0.83 * Difficulty.notes)
 			} else {
-				pure = Math.round(oldPercent * difficulty.notes)
+				pure = Math.round(oldPercent * Difficulty.notes)
 			}
 		}
 	}
@@ -115,7 +141,7 @@
 	 * @param {number} score
 	 * @returns {string}
 	 */
-	function arcaeaScoreFormat(score) {
+	function arcaeaScoreFormat(score: number) {
 		score = Number(score);
 		let output = score.toLocaleString("en-UK", {
 			maximumFractionDigits: 0,
@@ -131,13 +157,13 @@
 <h1>Arcaea Play Rating Calculator</h1>
 <a href='https://github.com/12beesinatrenchcoat/arcaea-potential-calculator'>Source Code</a>
 <a href='https://arcaea.fandom.com/'>Arcaea Community Wiki</a>
-<p>This is a fanmade project. It is unaffiliated with Arcaea and lowiro. Arcaea belongs to lowiro.</p>
+<p>This is a fanmade project. It is unaffiliated with Arcaea and lowiro. Arcaea belongs to lowiro. Check it out <a href="https://arcaea.lowiro.com">here!</a></p>
 
 <div class='two-column'>
 	<div id='select-menu' class='flow'>
 		<label>
-			Song
-			<select id="song-select" bind:value={selectedSong}>
+			song
+			<select id="song-select" bind:value={selectedsong}>
 				{#each Object.entries(packs) as [pack, songs]}
 					<optgroup label={pack}>
 						{#each Object.keys(songs) as song}
@@ -175,22 +201,22 @@
 		</div>
 		<div id='diff-info'>
 			<p id="difficulty" class={selectedDifficulty}>{(selectedDifficulty || "").toUpperCase()}</p>
-			<p>Level: {difficulty.level} (constant {difficulty.constant.toFixed(1)})</p>
-			<p>Note count: {difficulty.notes}</p>
-			<p>Note design: {difficulty.charter}</p>
+			<p>Level: {Difficulty.level} (constant {Difficulty.constant.toFixed(1)})</p>
+			<p>Note count: {Difficulty.notes}</p>
+			<p>Note design: {Difficulty.charter}</p>
 		</div>
 	</div>
 </div>
 
 <div id="stats">
 	<p id='result'><span id='score'>{arcaeaScoreFormat(score)}</span> <span id='grade' data-grade={grade}>{grade}</span></p>
-	<p>ptt: {Math.max((difficulty.constant + scoreModifier), 0.0).toFixed(2)} ({difficulty.constant.toFixed(2)} + {scoreModifier.toFixed(2)})</p>
+	<p>ptt: {Math.max((Difficulty.constant + scoreModifier), 0.0).toFixed(2)} ({Difficulty.constant.toFixed(2)} + {scoreModifier.toFixed(2)})</p>
 </div>
 
-<span bind:this={pureLostDisplay}>PURE: {pure} / LOST: {lost}</span><br>
+<span>PURE: {pure} / LOST: {lost}</span><br>
 <input type='range' id='pure-slider' name='pure' bind:value={pure} step='1'
-			 min={Math.max(Math.floor(difficulty.notes * 0.83), 0)} max={difficulty.notes}>
-<svg id='chart' viewBox='0 0 160, 70' bind:this={graph}>
+			 min={Math.max(Math.floor(Difficulty.notes * 0.83), 0)} max={Difficulty.notes}>
+<svg id='chart' viewBox='0 0 160, 70'>
 	<style>
 		polyline {
 				stroke: currentColor;
