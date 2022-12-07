@@ -4,12 +4,12 @@
     "src": "src/lib/assets/difficulty-icon.svg"
   },
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-ee308427.js",
+    "file": "_app/immutable/start-fedca496.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
       "_index-558cd723.js",
-      "_singletons-66c57007.js"
+      "_singletons-1c6b4810.js"
     ],
     "dynamicImports": [
       ".svelte-kit/generated/nodes/0.js",
@@ -32,16 +32,16 @@
     ]
   },
   "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
-    "file": "_app/immutable/components/error.svelte-9229997b.js",
+    "file": "_app/immutable/components/error.svelte-c2c6a59d.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte",
     "isEntry": true,
     "imports": [
       "_index-558cd723.js",
-      "_singletons-66c57007.js"
+      "_singletons-1c6b4810.js"
     ]
   },
   "src/routes/+page.svelte": {
-    "file": "_app/immutable/components/pages/_page.svelte-831ff616.js",
+    "file": "_app/immutable/components/pages/_page.svelte-77a31801.js",
     "src": "src/routes/+page.svelte",
     "isEntry": true,
     "imports": [
@@ -56,8 +56,8 @@
       "__layout-60ced57c.js"
     ]
   },
-  "_singletons-66c57007.js": {
-    "file": "_app/immutable/chunks/singletons-66c57007.js",
+  "_singletons-1c6b4810.js": {
+    "file": "_app/immutable/chunks/singletons-1c6b4810.js",
     "imports": [
       "_index-558cd723.js"
     ]
@@ -78,7 +78,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/1.js": {
-    "file": "_app/immutable/chunks/1-fed6e726.js",
+    "file": "_app/immutable/chunks/1-4dc29cba.js",
     "src": ".svelte-kit/generated/nodes/1.js",
     "isDynamicEntry": true,
     "imports": [
@@ -86,7 +86,7 @@
     ]
   },
   ".svelte-kit/generated/nodes/2.js": {
-    "file": "_app/immutable/chunks/2-f18bb17a.js",
+    "file": "_app/immutable/chunks/2-c9c0edb4.js",
     "src": ".svelte-kit/generated/nodes/2.js",
     "isDynamicEntry": true,
     "imports": [
