@@ -40,7 +40,7 @@
 	export let song: Song = {
 		artist: "or just wait a bit, maybe it's loading",
 		pack: "whoops",
-		bpm: "5?",
+		bpm: "at least 5",
 		length: "no",
 		side: "Colorless",
 		version: "-2",
@@ -59,6 +59,9 @@
 	export let pure = 0;
 	export let lost: number;
 
+	export let potentialValue = 0;
+	export let potentialTier: "blue" | "green" | "purple" | "purple-deco" | "tomato-deco" | "1star" | "2star" | "3star";
+
 	$: lost = Difficulty.notes - pure;
 
 	$: score = Math.ceil((pure / Difficulty.notes) * 10e6)
@@ -71,7 +74,10 @@
 		} else {
 			scoreModifier = (score - 9.5e6) / 0.3e6;
 		}
+
+		calculatePotential();
 	}
+	
 
 	$: {
 		if (score >= 9.9e6) {
@@ -134,6 +140,7 @@
 				pure = Math.round(oldPercent * Difficulty.notes)
 			}
 		}
+		calculatePotential();
 	}
 
 	/**
@@ -150,6 +157,21 @@
 		output = output.replaceAll(",", "'");
 		return output;
 	}
+
+	function calculatePotential() {
+		potentialValue = Math.max(
+			Math.round((Difficulty.constant + scoreModifier) * 100) / 100, 
+			0.0)
+		potentialTier = 
+			potentialValue >= 13.0 ? "3star" :
+			potentialValue >= 12.5 ? "2star" :
+			potentialValue >= 12.0 ? "1star" :
+			potentialValue >= 11.0 ? "tomato-deco" :
+			potentialValue >= 10.0 ? "purple-deco" :
+			potentialValue >= 7.0  ? "purple" :
+			potentialValue >= 3.5  ? "green" : "blue";
+	}
+	
 </script>
 
 <svelte:window on:load={changeDifficulty}/>
@@ -208,12 +230,26 @@
 	</div>
 </div>
 
+<!-- Score, grade, potential, note counts -->
 <div id="stats">
-	<p id='result'><span id='score'>{arcaeaScoreFormat(score)}</span> <span id='grade' data-grade={grade}>{grade}</span></p>
-	<p>ptt: {Math.max((Difficulty.constant + scoreModifier), 0.0).toFixed(2)} ({Difficulty.constant.toFixed(2)} + {scoreModifier.toFixed(2)})</p>
+	<p id='result'>
+		<span id='score'>{arcaeaScoreFormat(score)}</span> 
+		<span id='grade' data-grade={grade}>{grade}</span>
+	</p>
+	<div id='potential'>
+		<div 
+			id='potential-diamond' 
+			data-ptt={potentialValue.toFixed(2)}
+			data-tier={potentialTier}>
+		</div>
+		<!-- ({Difficulty.constant.toFixed(2)} + {scoreModifier.toFixed(2)}) -->
+	</div>
+	<div id='judge'>
+		<span>PURE: {pure}</span>
+		<span>LOST: {lost}</span>
+	</div>
 </div>
 
-<span>PURE: {pure} / LOST: {lost}</span><br>
 <input type='range' id='pure-slider' name='pure' bind:value={pure} step='1'
 			 min={Math.max(Math.floor(Difficulty.notes * 0.83), 0)} max={Difficulty.notes}>
 <svg id='chart' viewBox='0 0 160, 70'>

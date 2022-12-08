@@ -1,0 +1,26 @@
+<svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<linearGradient id='deco'>
+			<stop offset='0%' stop-color='transparent'/>
+			<stop offset='50%' stop-color='#f44'/>
+			<stop offset='100%' stop-color='transparent'/>
+		</linearGradient>
+		<filter id="star-shadow">
+			<feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#a22"/>
+		</filter>
+	</defs>
+	<style>
+		path {
+			filter: url("#star-shadow")
+		}
+	</style>
+	<polygon fill="#a22" points="32,91 68,91 65,94 35,94"/>
+	<polygon fill="#f44" points="0,50 50,100 100,50 50,0"/>
+	<polygon fill="#000" fill-opacity="0.6" points="0,50 50,0 100,50"/>
+	<ellipse fill="white" fill-opacity="0.85" cx="50" cy="50" rx="25" ry="25"/>
+	<ellipse stroke="white" fill="transparent" cx="50" cy="50" rx="33" ry="33"/>
+	<!-- https://commons.wikimedia.org/wiki/File:Five-pointed_star.svg -->
+	<path fill="white" d="m50,50 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" transform="scale(0.33) translate(-40)" transform-origin="50 100"/>
+	<path fill="white" d="m50,50 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" transform="scale(0.33) translate(40)" transform-origin="50 100"/>
+	<path fill="white" d="m50,50 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" transform="scale(0.33)" transform-origin="50 100"/>
+</svg>

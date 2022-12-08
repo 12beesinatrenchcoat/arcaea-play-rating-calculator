@@ -20,6 +20,7 @@ body, .flow
 	> * + *
 		margin-top: 1em
 
+/* Song select */
 #pure-slider
 	width: 100%
 
@@ -113,20 +114,34 @@ input[value="future"]
 	min-width: 24ch
 	max-width: 100%
 
+#difficulty
+	font-weight: 600
+
+/* Play info */
+#stats
+	display: flex
+	justify-content: space-evenly
+
 #result
 	font-family: "Exo", sans-serif
 	font-size: 2em
+	display: flex
+	flex-direction: column
+	align-items: center
+	width: 12rem
 	> *
 		font-family: inherit
 
 #score
 	width: 8.5ch
+	text-align: center
 	display: inline-block
 
 #grade
 	-webkit-background-clip: text
 	background-clip: text
 	color: transparent
+	font-size: 1.5em
 
 	&[data-grade="D"]
 		background-image: linear-gradient(#111, crimson)
@@ -143,9 +158,71 @@ input[value="future"]
 	&[data-grade="EX+"]
 		background-image: linear-gradient(#848, #5af)
 
+$diamond-size: 6rem
 
-#difficulty
-	font-weight: 600
+#potential
+	width: $diamond-size
+	height: $diamond-size
+
+#potential-diamond
+	&::before, &::after
+		display: inline-block
+		position: absolute
+
+	&::before
+		content: url('$lib/assets/potential-normal.svg')
+		width: $diamond-size
+		height: $diamond-size
+
+	&::after
+		content: attr(data-ptt)
+		font-family: "Exo", sans-serif
+		font-weight: 500
+		width: $diamond-size
+		height: $diamond-size
+		font-size: 2em
+		display: flex
+		align-items: center
+		justify-content: center
+		color: white
+	
+	&[data-tier="blue"]
+		filter: hue-rotate(210deg)
+	
+	&[data-tier="green"]
+		filter: hue-rotate(120deg)
+
+	&[data-tier*="purple"]
+		filter: hue-rotate(280deg)
+
+	&[data-tier*="deco"]::before
+		content: url('$lib/assets/potential-decorated.svg')
+
+	&[data-tier*="1star"]::before
+		content: url('$lib/assets/potential-1star.svg')
+		filter: hue-rotate(-20deg)
+
+	&[data-tier*="2star"]::before
+		content: url('$lib/assets/potential-2star.svg')
+		filter: hue-rotate(-25deg)
+
+	&[data-tier*="3star"]
+		&::before
+			content: url('$lib/assets/potential-3star.svg')
+			filter: hue-rotate(-30deg)
+		&::after
+			font-weight: 600
+			-webkit-text-stroke: 2px black
+
+	/* No hue rotate needed for tomato, already red */
+		
+
+#judge
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: center
+	width: 12rem
 
 .past
 	background-color: #3b9ee1a4
