@@ -44,12 +44,14 @@ async function getCSVObject() {
 	const response = await fetch("https://gist.githubusercontent.com/12beesinatrenchcoat/1bb2081eb2d6857254f06d3cf228e0c9/raw/")
 	csv.parseStream(response.body, {headers: true})
 		.on("data", async row => {
-			const {title, artist, length, difficulty, level, notes, constant, charter, bpm, side, pack, version} = row;
+			// Not included: length, bpm, version
+			const {title, artist, difficulty, level, notes, constant, charter, side, pack} = row;
 
+			// Only include charts with a chart constant.
 			if (Number(constant)) {
 				packList[pack] ??= {};
 
-				packList[pack][title] ??= {artist, length, pack, bpm, side, version};
+				packList[pack][title] ??= {artist, pack, side};
 
 				packList[pack][title].difficulties = packList[pack][title].difficulties || {};
 

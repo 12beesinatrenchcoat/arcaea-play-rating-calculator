@@ -12,9 +12,7 @@
 
 	interface Song {
 		artist: string
-		length: string
 		pack: string
-		bpm: string
 		side: "Light" | "Conflict" | "Colorless"
 		version: string
 		difficulties: {
@@ -40,8 +38,6 @@
 	export let song: Song = {
 		artist: "or just wait a bit, maybe it's loading",
 		pack: "whoops",
-		bpm: "at least 5",
-		length: "no",
 		side: "Colorless",
 		version: "-2",
 		difficulties: {},
@@ -219,7 +215,6 @@
 			<p>{song.pack}</p>
 			<h2 id='song-title'>{songTitle}</h2>
 			<p>{song.artist}</p>
-			<p>BPM: {song.bpm}</p>
 		</div>
 		<div id='diff-info'>
 			<p id="difficulty" class={selectedDifficulty}>{(selectedDifficulty || "").toUpperCase()}</p>
