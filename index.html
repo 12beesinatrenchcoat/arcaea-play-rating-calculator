@@ -11,14 +11,14 @@
 		<link href="https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="content-security-policy" content=""><title>Arcaea Play Rating Calculator</title>
-		<link href="/arcaea-play-rating-calculator/_app/immutable/assets/_layout-1bb234f7.css" rel="stylesheet">
-		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/start-c3b47b28.js">
+		<link href="/arcaea-play-rating-calculator/_app/immutable/assets/_layout-db34468a.css" rel="stylesheet">
+		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/start-0a61e025.js">
 		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/index-558cd723.js">
-		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/singletons-6925b0c7.js">
+		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/singletons-f45089aa.js">
 		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/components/pages/_layout.svelte-68913262.js">
 		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/modules/pages/_layout.js-542205c4.js">
 		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/_layout-60ced57c.js">
-		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/components/pages/_page.svelte-719203d7.js">
+		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/components/pages/_page.svelte-ddda11b5.js">
 	</head>
 	<body>
 		
@@ -67,22 +67,25 @@
 		<span>LOST: 1</span></div></div>
 
 <input type="range" id="pure-slider" name="pure" step="1" min="0" max="1" value="0">
-<svg id="chart" viewBox="0 0 160, 70"><style>polyline {
+<svg id="chart" viewBox="0 0 160, 70"><style>* {
+				fill: currentColor;
+		}
+		polyline {
 				stroke: currentColor;
 				stroke-width: 2;
 				vector-effect: non-scaling-stroke;
 		}
-		circle {
-				fill: currentColor;
+		text {
+			font: 0.33em 'Exo';
 		}
 		.dotted {
-				stroke-dasharray: 4;
+			stroke-dasharray: 4;
 		}
-	</style><polyline points="0,70 130,20"></polyline><polyline points="130,20 150,10"></polyline><polyline class="dotted" points="150,10 160,10"></polyline><polyline class="dotted" points="130,0 130,70"></polyline><circle id="point" r="1.5" cx="-921.4285714285714" cy="424.3956043956044"></circle></svg>
+	</style><polyline points="0,70 130,20"></polyline><polyline points="130,20 150,10"></polyline><polyline class="dotted" points="150,10 160,10"></polyline><polyline class="dotted" points="130,0 130,70"></polyline><text x="131" y="70">EX</text><circle id="point" r="1.5" cx="-921.4285714285714" cy="424.3956043956044"></circle></svg>
 
 
-		<script type="module" data-sveltekit-hydrate="1gm1fox">
-			import { start } from "/arcaea-play-rating-calculator/_app/immutable/start-c3b47b28.js";
+		<script type="module" data-sveltekit-hydrate="4g8ay1">
+			import { start } from "/arcaea-play-rating-calculator/_app/immutable/start-0a61e025.js";
 
 			start({
 				env: {},
@@ -96,7 +99,7 @@
 					form: null
 				},
 				paths: {"base":"/arcaea-play-rating-calculator","assets":"/arcaea-play-rating-calculator"},
-				target: document.querySelector('[data-sveltekit-hydrate="1gm1fox"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="4g8ay1"]').parentNode,
 				trailing_slash: "never"
 			});
 		</script>
