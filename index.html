@@ -11,14 +11,14 @@
 		<link href="https://fonts.googleapis.com/css2?family=Exo:wght@500&family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="content-security-policy" content=""><title>Arcaea Play Rating Calculator</title>
-		<link href="/arcaea-play-rating-calculator/_app/immutable/assets/_layout-a9c424e0.css" rel="stylesheet">
-		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/start-fedca496.js">
+		<link href="/arcaea-play-rating-calculator/_app/immutable/assets/_layout-1bb234f7.css" rel="stylesheet">
+		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/start-c3b47b28.js">
 		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/index-558cd723.js">
-		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/singletons-1c6b4810.js">
+		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/singletons-6925b0c7.js">
 		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/components/pages/_layout.svelte-68913262.js">
 		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/modules/pages/_layout.js-542205c4.js">
 		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/chunks/_layout-60ced57c.js">
-		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/components/pages/_page.svelte-77a31801.js">
+		<link rel="modulepreload" href="/arcaea-play-rating-calculator/_app/immutable/components/pages/_page.svelte-719203d7.js">
 	</head>
 	<body>
 		
@@ -52,16 +52,20 @@
 	<div class="flow"><div id="song-info"><p>whoops</p>
 			<h2 id="song-title">if you're seeing, this, something probably went wrong</h2>
 			<p>or just wait a bit, maybe it's loading</p>
-			<p>BPM: 5?</p></div>
+			<p>BPM: at least 5</p></div>
 		<div id="diff-info"><p id="difficulty"></p>
 			<p>Level: no (constant 0.0)</p>
 			<p>Note count: 1</p>
 			<p>Note design: no</p></div></div></div>
 
-<div id="stats"><p id="result"><span id="score">00'000'000</span> <span id="grade" data-grade="D">D</span></p>
-	<p>ptt: 0.00 (0.00 + -31.67)</p></div>
 
-<span>PURE: 0 / LOST: 1</span><br>
+<div id="stats"><p id="result"><span id="score">00'000'000</span> 
+		<span id="grade" data-grade="D">D</span></p>
+	<div id="potential"><div id="potential-diamond" data-ptt="0.00" data-tier="blue"></div>
+		</div>
+	<div id="judge"><span>PURE: 0</span>
+		<span>LOST: 1</span></div></div>
+
 <input type="range" id="pure-slider" name="pure" step="1" min="0" max="1" value="0">
 <svg id="chart" viewBox="0 0 160, 70"><style>polyline {
 				stroke: currentColor;
@@ -77,8 +81,8 @@
 	</style><polyline points="0,70 130,20"></polyline><polyline points="130,20 150,10"></polyline><polyline class="dotted" points="150,10 160,10"></polyline><polyline class="dotted" points="130,0 130,70"></polyline><circle id="point" r="1.5" cx="-921.4285714285714" cy="424.3956043956044"></circle></svg>
 
 
-		<script type="module" data-sveltekit-hydrate="ij9xyt">
-			import { start } from "/arcaea-play-rating-calculator/_app/immutable/start-fedca496.js";
+		<script type="module" data-sveltekit-hydrate="1gm1fox">
+			import { start } from "/arcaea-play-rating-calculator/_app/immutable/start-c3b47b28.js";
 
 			start({
 				env: {},
@@ -92,7 +96,7 @@
 					form: null
 				},
 				paths: {"base":"/arcaea-play-rating-calculator","assets":"/arcaea-play-rating-calculator"},
-				target: document.querySelector('[data-sveltekit-hydrate="ij9xyt"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="1gm1fox"]').parentNode,
 				trailing_slash: "never"
 			});
 		</script>
