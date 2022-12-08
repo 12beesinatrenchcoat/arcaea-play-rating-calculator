@@ -56,7 +56,7 @@
 	export let lost: number;
 
 	export let potentialValue = 0;
-	export let potentialTier: "blue" | "green" | "purple" | "purple-deco" | "tomato-deco" | "1star" | "2star" | "3star";
+	export let potentialTier: "blue" | "green" | "purple" | "purple-deco" | "tomato-deco" | "star1" | "star2" | "star3";
 
 	$: lost = Difficulty.notes - pure;
 
@@ -159,9 +159,9 @@
 			Math.round((Difficulty.constant + scoreModifier) * 100) / 100, 
 			0.0)
 		potentialTier = 
-			potentialValue >= 13.0 ? "3star" :
-			potentialValue >= 12.5 ? "2star" :
-			potentialValue >= 12.0 ? "1star" :
+			potentialValue >= 13.0 ? "star3" :
+			potentialValue >= 12.5 ? "star2" :
+			potentialValue >= 12.0 ? "star1" :
 			potentialValue >= 11.0 ? "tomato-deco" :
 			potentialValue >= 10.0 ? "purple-deco" :
 			potentialValue >= 7.0  ? "purple" :

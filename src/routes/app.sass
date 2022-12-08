@@ -201,17 +201,17 @@ $diamond-size: 6rem
 	&[data-tier*="deco"]::before
 		content: url('$lib/assets/potential-decorated.svg')
 
-	&[data-tier*="1star"]::before
-		content: url('$lib/assets/potential-1star.svg')
+	&[data-tier*="star1"]::before
+		content: url('$lib/assets/potential-star1.svg')
 		filter: hue-rotate(-20deg)
 
-	&[data-tier*="2star"]::before
-		content: url('$lib/assets/potential-2star.svg')
+	&[data-tier*="star2"]::before
+		content: url('$lib/assets/potential-star2.svg')
 		filter: hue-rotate(-30deg)
 
-	&[data-tier*="3star"]
+	&[data-tier*="star3"]
 		&::before
-			content: url('$lib/assets/potential-3star.svg')
+			content: url('$lib/assets/potential-star3.svg')
 			filter: hue-rotate(-40deg)
 
 	/* No hue rotate needed for tomato, already red */
