@@ -254,22 +254,26 @@
 			 min={Math.max(Math.floor(Difficulty.notes * 0.83), 0)} max={Difficulty.notes}>
 <svg id='chart' viewBox='0 0 160, 70'>
 	<style>
+		* {
+				fill: currentColor;
+		}
 		polyline {
 				stroke: currentColor;
 				stroke-width: 2;
 				vector-effect: non-scaling-stroke;
 		}
-		circle {
-				fill: currentColor;
+		text {
+			font: 0.33em 'Exo';
 		}
 		.dotted {
-				stroke-dasharray: 4;
+			stroke-dasharray: 4;
 		}
 	</style>
 	<polyline points='0,70 130,20'/>
 	<polyline points='130,20 150,10'/>
 	<polyline class='dotted' points='150,10 160,10'/>
 	<polyline class='dotted' points='130,0 130,70'/>
+	<text x='131' y='70'>EX</text>
 	<circle id='point' r='1.5' cx={x} cy={y}/>
 </svg>
 

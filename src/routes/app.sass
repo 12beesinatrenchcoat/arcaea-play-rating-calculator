@@ -177,14 +177,17 @@ $diamond-size: 6rem
 	&::after
 		content: attr(data-ptt)
 		font-family: "Exo", sans-serif
-		font-weight: 500
+		font-weight: 600
 		width: $diamond-size
 		height: $diamond-size
-		font-size: 2em
+		font-size: 2.5em
+		letter-spacing: -0.02ch
 		display: flex
 		align-items: center
+		margin-top: 0.1rem
 		justify-content: center
 		color: white
+		-webkit-text-stroke: grey 1px
 	
 	&[data-tier="blue"]
 		filter: hue-rotate(210deg)
@@ -204,15 +207,12 @@ $diamond-size: 6rem
 
 	&[data-tier*="2star"]::before
 		content: url('$lib/assets/potential-2star.svg')
-		filter: hue-rotate(-25deg)
+		filter: hue-rotate(-30deg)
 
 	&[data-tier*="3star"]
 		&::before
 			content: url('$lib/assets/potential-3star.svg')
-			filter: hue-rotate(-30deg)
-		&::after
-			font-weight: 600
-			-webkit-text-stroke: 2px black
+			filter: hue-rotate(-40deg)
 
 	/* No hue rotate needed for tomato, already red */
 		
