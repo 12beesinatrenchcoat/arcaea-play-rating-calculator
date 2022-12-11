@@ -15,6 +15,10 @@ body
 		color: inherit
 	#grade
 		filter: contrast(0.8) saturate(2) brightness(1.25)
+	#potential-diamond::before
+		filter: contrast(0.8) saturate(2) brightness(0.75)
+	#chart > rect, #chart > g > rect
+		filter: saturate(1.25) brightness(0.75) opacity(0.75)
 
 body, .flow
 	> * + *
@@ -29,7 +33,6 @@ body, .flow
 	flex-direction: row
 	justify-content: flex-start
 	flex-wrap: wrap
-
 
 .two-column > :first-child
 	margin-right: 4ch
@@ -116,6 +119,7 @@ input[value="future"]
 
 #difficulty
 	font-weight: 600
+	background-color: var(--color)
 
 /* Play info */
 #stats
@@ -215,7 +219,6 @@ $diamond-size: 6rem
 			filter: hue-rotate(-40deg)
 
 	/* No hue rotate needed for tomato, already red */
-		
 
 #judge
 	display: flex
@@ -224,14 +227,14 @@ $diamond-size: 6rem
 	justify-content: center
 	width: 12rem
 
-.past
-	background-color: #3b9ee1a4
+.past, #blue 
+	--color: #0081d8
 
-.present
-	background-color: #3aaf3ba4
+.present, #green
+	--color: #009700
 
-.future
-	background-color: #bf74f8a4
+.future, #purple
+	--color: #ad4bf6
 
 .beyond
-	background-color: #ff6f6fa4
+	--color: #ff4444
