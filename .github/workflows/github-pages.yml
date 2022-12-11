@@ -13,10 +13,10 @@ jobs:
   github-pages:
     runs-on: ubuntu-latest
     steps:
-      - name: "checking out..."
+      - name: 'checking out...'
         uses: actions/checkout@v3
 
-      - name: "setting up node…"
+      - name: 'setting up node…'
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -24,7 +24,7 @@ jobs:
       - run: npm run fetch:charts
       - run: npm run build
 
-      - name: "deploy!"
+      - name: 'deploy!'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -32,4 +32,3 @@ jobs:
           publish_branch: 'gh-pages'
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-          

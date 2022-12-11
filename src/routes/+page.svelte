@@ -9,7 +9,7 @@
 	interface Song {
 		artist: string;
 		pack: string;
-		side: 'Light' | 'Conflict' | 'Colorless';
+		side: "Light" | "Conflict" | "Colorless";
 		version: string;
 		difficulties: {
 			past?: Difficulty;
@@ -19,7 +19,7 @@
 		};
 	}
 
-	import packs from '$lib/assets/charts.json';
+	import packs from "$lib/assets/charts.json";
 
 	// Position of point on graph.
 	export let x: string;
@@ -31,8 +31,8 @@
 		blue: [0, 0],
 		green: [0, 0],
 		purple: [0, 0],
-		'purple-deco': [0, 0],
-		'tomato-deco': [0, 0],
+		"purple-deco": [0, 0],
+		"tomato-deco": [0, 0],
 		star1: [0, 0, 0],
 		star2: [0, 0, 0],
 		star3: [0, 0, 0],
@@ -42,43 +42,43 @@
 	 * Actually a stringified table. [pack: string, songTitle: string]
 	 */
 	export let selectedsong: string;
-	let selectedDifficulty: 'past' | 'present' | 'future' | 'beyond';
+	let selectedDifficulty: "past" | "present" | "future" | "beyond";
 	export let songTitle =
 		"if you're seeing, this, something probably went wrong";
 	export let song: Song = {
 		artist: "or just wait a bit, maybe it's loading",
-		pack: 'whoops',
-		side: 'Colorless',
-		version: '-2',
+		pack: "whoops",
+		side: "Colorless",
+		version: "-2",
 		difficulties: {},
 	};
-	export let Difficulty: Difficulty = {
-		level: 'no',
+	export let difficulty: Difficulty = {
+		level: "no",
 		notes: 1,
 		constant: 0,
-		charter: 'no',
+		charter: "no",
 	};
 
 	export let score: number;
-	export let grade: 'EX+' | 'EX' | 'AA' | 'A' | 'B' | 'C' | 'D';
+	export let grade: "EX+" | "EX" | "AA" | "A" | "B" | "C" | "D";
 	export let scoreModifier: number;
 	export let pure = 0;
 	export let lost: number;
 
 	export let potentialValue = 0;
 	export let potentialTier:
-		| 'blue'
-		| 'green'
-		| 'purple'
-		| 'purple-deco'
-		| 'tomato-deco'
-		| 'star1'
-		| 'star2'
-		| 'star3';
+		| "blue"
+		| "green"
+		| "purple"
+		| "purple-deco"
+		| "tomato-deco"
+		| "star1"
+		| "star2"
+		| "star3";
 
-	$: lost = Difficulty.notes - pure;
+	$: lost = difficulty.notes - pure;
 
-	$: score = Math.ceil((pure / Difficulty.notes) * 10e6);
+	$: score = Math.ceil((pure / difficulty.notes) * 10e6);
 
 	// Setting score modifier
 	$: {
@@ -96,19 +96,19 @@
 	// Setting grade
 	$: {
 		if (score >= 9.9e6) {
-			grade = 'EX+';
+			grade = "EX+";
 		} else if (score >= 9.8e6) {
-			grade = 'EX';
+			grade = "EX";
 		} else if (score >= 9.5e6) {
-			grade = 'AA';
+			grade = "AA";
 		} else if (score >= 9.2e6) {
-			grade = 'A';
+			grade = "A";
 		} else if (score >= 8.9e6) {
-			grade = 'B';
+			grade = "B";
 		} else if (score >= 8.6e6) {
-			grade = 'C';
+			grade = "C";
 		} else {
-			grade = 'D';
+			grade = "D";
 		}
 	}
 
@@ -143,10 +143,10 @@
 		) {
 			// Set difficulty to first difficulty if none chosen
 			selectedDifficulty = Object.keys(difficulties)[0] as
-				| 'past'
-				| 'present'
-				| 'future'
-				| 'beyond';
+				| "past"
+				| "present"
+				| "future"
+				| "beyond";
 		}
 
 		changeDifficulty();
@@ -154,15 +154,16 @@
 
 	// Difficulty change!
 	function changeDifficulty() {
-		const oldPercent = pure / Difficulty.notes;
+		const oldPercent = pure / difficulty.notes;
 		if (song.difficulties && selectedDifficulty) {
-			Difficulty = song.difficulties[selectedDifficulty]!;
+			difficulty = song.difficulties[selectedDifficulty]!;
 			if (pure === 0) {
-				pure = Math.floor(0.83 * Difficulty.notes);
+				pure = Math.floor(0.83 * difficulty.notes);
 			} else {
-				pure = Math.round(oldPercent * Difficulty.notes);
+				pure = Math.round(oldPercent * difficulty.notes);
 			}
 		}
+	
 		calculatePotential();
 
 		// Calculating potential ranks, moving rectangles around
@@ -170,8 +171,8 @@
 			blue: [0, 3.5],
 			green: [3.5, 7.0],
 			purple: [7.0, 10.0],
-			'purple-deco': [10.0, 11.0],
-			'tomato-deco': [11.0, 12.0],
+			"purple-deco": [10.0, 11.0],
+			"tomato-deco": [11.0, 12.0],
 			star1: [12.0, 12.5],
 			star2: [12.5, 13.0],
 			star3: [13.0, 99.0],
@@ -180,9 +181,10 @@
 		function modifierToScore(modifier: number) {
 			if (modifier >= 1) {
 				return 0.2e6 * (modifier - 1) + 9.8e6;
-			} else {
-				return 0.3e6 * modifier + 9.5e6;
 			}
+	 
+				return 0.3e6 * modifier + 9.5e6;
+			
 		}
 
 		Object.keys(pttBounds).forEach((tier: string) => {
@@ -191,18 +193,18 @@
 			const startX =
 				pttBound[0] === 0
 					? 0 // If the lower bound is 0, start at 0
-					: scoreToGraphX(modifierToScore(pttBound[0] - Difficulty.constant));
+					: scoreToGraphX(modifierToScore(pttBound[0] - difficulty.constant));
 
 			const endX = scoreToGraphX(
-				modifierToScore(pttBound[1] - Difficulty.constant),
+				modifierToScore(pttBound[1] - difficulty.constant),
 			);
 
 			console.log(
 				tier,
 				startX,
-				modifierToScore(pttBound[0] - Difficulty.constant),
+				modifierToScore(pttBound[0] - difficulty.constant),
 				endX,
-				modifierToScore(pttBound[1] - Difficulty.constant),
+				modifierToScore(pttBound[1] - difficulty.constant),
 				(startX + endX) / 2,
 			);
 
@@ -220,11 +222,11 @@
 	 */
 	function arcaeaScoreFormat(score: number) {
 		score = Number(score);
-		let output = score.toLocaleString('en-UK', {
+		let output = score.toLocaleString("en-UK", {
 			maximumFractionDigits: 0,
 			minimumIntegerDigits: 8,
 		});
-		output = output.replaceAll(',', "'");
+		output = output.replaceAll(",", "'");
 		return output;
 	}
 
@@ -234,25 +236,25 @@
 
 	function calculatePotential() {
 		potentialValue = Math.max(
-			Math.round((Difficulty.constant + scoreModifier) * 100) / 100,
+			Math.round((difficulty.constant + scoreModifier) * 100) / 100,
 			0.0,
 		);
 		potentialTier =
 			potentialValue >= 13.0
-				? 'star3'
+				? "star3"
 				: potentialValue >= 12.5
-				? 'star2'
+				? "star2"
 				: potentialValue >= 12.0
-				? 'star1'
+				? "star1"
 				: potentialValue >= 11.0
-				? 'tomato-deco'
+				? "tomato-deco"
 				: potentialValue >= 10.0
-				? 'purple-deco'
+				? "purple-deco"
 				: potentialValue >= 7.0
-				? 'purple'
+				? "purple"
 				: potentialValue >= 3.5
-				? 'green'
-				: 'blue';
+				? "green"
+				: "blue";
 	}
 </script>
 
@@ -296,7 +298,7 @@
 					name="difficulty"
 					data-level={song.difficulties.past
 						? song.difficulties.past.level
-						: ''}
+						: ""}
 					value="past"
 					disabled={!song.difficulties.past}
 				/>
@@ -310,7 +312,7 @@
 					name="difficulty"
 					data-level={song.difficulties.present
 						? song.difficulties.present.level
-						: ''}
+						: ""}
 					value="present"
 					disabled={!song.difficulties.present}
 				/>
@@ -324,7 +326,7 @@
 					name="difficulty"
 					data-level={song.difficulties.future
 						? song.difficulties.future.level
-						: ''}
+						: ""}
 					value="future"
 					disabled={!song.difficulties.future}
 				/>
@@ -338,7 +340,7 @@
 					name="difficulty"
 					data-level={song.difficulties.beyond
 						? song.difficulties.beyond.level
-						: ''}
+						: ""}
 					value="beyond"
 					disabled={!song.difficulties.beyond}
 				/>
@@ -354,13 +356,13 @@
 		</div>
 		<div id="diff-info">
 			<p id="difficulty" class={selectedDifficulty}>
-				{(selectedDifficulty || '').toUpperCase()}
+				{(selectedDifficulty || "").toUpperCase()}
 			</p>
 			<p>
-				Level: {Difficulty.level} (constant {Difficulty.constant.toFixed(1)})
+				Level: {difficulty.level} (constant {difficulty.constant.toFixed(1)})
 			</p>
-			<p>Note count: {Difficulty.notes}</p>
-			<p>Note design: {Difficulty.charter}</p>
+			<p>Note count: {difficulty.notes}</p>
+			<p>Note design: {difficulty.charter}</p>
 		</div>
 	</div>
 </div>
@@ -377,7 +379,7 @@
 			data-ptt={potentialValue.toFixed(2)}
 			data-tier={potentialTier}
 		/>
-		<!-- ({Difficulty.constant.toFixed(2)} + {scoreModifier.toFixed(2)}) -->
+		<!-- ({difficulty.constant.toFixed(2)} + {scoreModifier.toFixed(2)}) -->
 	</div>
 	<div id="judge">
 		<span>PURE: {pure}</span>
@@ -391,8 +393,8 @@
 	name="pure"
 	bind:value={pure}
 	step="1"
-	min={Math.max(Math.floor(Difficulty.notes * 0.83), 0)}
-	max={Difficulty.notes}
+	min={Math.max(Math.floor(difficulty.notes * 0.83), 0)}
+	max={difficulty.notes}
 />
 
 <!-- 10x = 100k points -->
@@ -416,6 +418,7 @@
 			user-select: none;
 		}
 		g > text {
+			color: white;
 			font-size: 1.5em;
 			text-anchor: middle;
 			dominant-baseline: middle;
@@ -470,24 +473,24 @@
 
 		<clipPath id="star1-clip">
 			<rect
-				x={pttPosBounds['star1'][0]}
-				width={pttPosBounds['star1'][1]}
+				x={pttPosBounds.star1[0]}
+				width={pttPosBounds.star1[1]}
 				y="0"
 				height="70"
 			/>
 		</clipPath>
 		<clipPath id="star2-clip">
 			<rect
-				x={pttPosBounds['star2'][0]}
-				width={pttPosBounds['star2'][1]}
+				x={pttPosBounds.star2[0]}
+				width={pttPosBounds.star2[1]}
 				y="0"
 				height="70"
 			/>
 		</clipPath>
 		<clipPath id="star3-clip">
 			<rect
-				x={pttPosBounds['star3'][0]}
-				width={pttPosBounds['star3'][1]}
+				x={pttPosBounds.star3[0]}
+				width={pttPosBounds.star3[1]}
 				y="0"
 				height="70"
 			/>
@@ -495,48 +498,48 @@
 	</defs>
 	<rect
 		id="blue"
-		x={pttPosBounds['blue'][0]}
+		x={pttPosBounds.blue[0]}
 		y="0"
-		width={pttPosBounds['blue'][1]}
+		width={pttPosBounds.blue[1]}
 		height="70"
 	/>
 	<rect
 		id="green"
-		x={pttPosBounds['green'][0]}
+		x={pttPosBounds.green[0]}
 		y="0"
-		width={pttPosBounds['green'][1]}
+		width={pttPosBounds.green[1]}
 		height="70"
 	/>
 	<rect
 		id="purple"
-		x={pttPosBounds['purple'][0]}
+		x={pttPosBounds.purple[0]}
 		y="0"
-		width={pttPosBounds['purple'][1]}
+		width={pttPosBounds.purple[1]}
 		height="70"
 	/>
 	<rect
 		id="purple-deco"
-		x={pttPosBounds['purple-deco'][0]}
+		x={pttPosBounds["purple-deco"][0]}
 		y="0"
-		width={pttPosBounds['purple-deco'][1]}
+		width={pttPosBounds["purple-deco"][1]}
 		height="70"
 	/>
 	<rect
 		id="tomato-deco"
-		x={pttPosBounds['tomato-deco'][0]}
+		x={pttPosBounds["tomato-deco"][0]}
 		y="0"
-		width={pttPosBounds['tomato-deco'][1]}
+		width={pttPosBounds["tomato-deco"][1]}
 		height="70"
 	/>
 	<g>
 		<rect
 			id="star1"
-			x={pttPosBounds['star1'][0]}
+			x={pttPosBounds.star1[0]}
 			y="0"
-			width={pttPosBounds['star1'][1]}
+			width={pttPosBounds.star1[1]}
 			height="70"
 		/>
-		<text x={pttPosBounds['star1'][2]} y="35" clip-path="url(#star1-clip)"
+		<text x={pttPosBounds.star1[2]} y="35" clip-path="url(#star1-clip)"
 			>★</text
 		>
 	</g>
@@ -544,29 +547,29 @@
 	<g>
 		<rect
 			id="star2"
-			x={pttPosBounds['star2'][0]}
+			x={pttPosBounds.star2[0]}
 			y="0"
-			width={pttPosBounds['star2'][1]}
+			width={pttPosBounds.star2[1]}
 			height="70"
 		/>
 		<g clip-path="url(#star2-clip)">
-			<text x={pttPosBounds['star2'][2]} y="25">★</text>
-			<text x={pttPosBounds['star2'][2]} y="45">★</text>
+			<text x={pttPosBounds.star2[2]} y="25">★</text>
+			<text x={pttPosBounds.star2[2]} y="45">★</text>
 		</g>
 	</g>
 
 	<g>
 		<rect
 			id="star3"
-			x={pttPosBounds['star3'][0]}
+			x={pttPosBounds.star3[0]}
 			y="0"
-			width={pttPosBounds['star3'][1]}
+			width={pttPosBounds.star3[1]}
 			height="70"
 		/>
 		<g clip-path="url(#star3-clip)">
-			<text x={pttPosBounds['star3'][2]} y="15">★</text>
-			<text x={pttPosBounds['star3'][2]} y="35">★</text>
-			<text x={pttPosBounds['star3'][2]} dy="55">★</text>
+			<text x={pttPosBounds.star3[2]} y="15">★</text>
+			<text x={pttPosBounds.star3[2]} y="35">★</text>
+			<text x={pttPosBounds.star3[2]} dy="55">★</text>
 		</g>
 	</g>
 	<polyline points="0,70 120,20" />

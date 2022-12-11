@@ -1,17 +1,17 @@
-import * as csv from "@fast-csv/parse"
+import * as csv from "@fast-csv/parse";
 import fetch from "node-fetch";
 import {writeFile} from "node:fs";
 
 const packList = {};
 const packOrder = {
-	"Arcaea": 1,
+	Arcaea: 1,
 	"World Extend": 2,
 	"Memory Archive": 2.5,
 	"Final Verdict": 3,
 	"Silent Answer": 3.1,
 	"Black Fate": 4,
 	"Adverse Prelude": 5,
-	"Luminous Sky" : 6,
+	"Luminous Sky": 6,
 	"Vicious Labyrinth": 7,
 	"Eternal Core": 8,
 	"Esoteric Order": 9,
@@ -38,14 +38,27 @@ const packOrder = {
 	"Lanota Collaboration": 24,
 	"Lanota Collaboration Chapter 2": 24.1,
 	"Dynamix Collaboration": 25,
-}
+};
 
 async function getCSVObject() {
-	const response = await fetch("https://gist.githubusercontent.com/12beesinatrenchcoat/1bb2081eb2d6857254f06d3cf228e0c9/raw/")
-	csv.parseStream(response.body, {headers: true})
+	const response = await fetch(
+		"https://gist.githubusercontent.com/12beesinatrenchcoat/1bb2081eb2d6857254f06d3cf228e0c9/raw/",
+	);
+	csv
+		.parseStream(response.body, {headers: true})
 		.on("data", async row => {
 			// Not included: length, bpm, version
-			const {title, artist, difficulty, level, notes, constant, charter, side, pack} = row;
+			const {
+				title,
+				artist,
+				difficulty,
+				level,
+				notes,
+				constant,
+				charter,
+				side,
+				pack,
+			} = row;
 
 			// Only include charts with a chart constant.
 			if (Number(constant)) {
@@ -53,7 +66,8 @@ async function getCSVObject() {
 
 				packList[pack][title] ??= {artist, pack, side};
 
-				packList[pack][title].difficulties = packList[pack][title].difficulties || {};
+				packList[pack][title].difficulties =
+					packList[pack][title].difficulties || {};
 
 				packList[pack][title].difficulties[difficulty] = {
 					level,
@@ -62,10 +76,10 @@ async function getCSVObject() {
 					charter,
 				};
 			} else {
-				console.log(`${artist} - ${title} [${difficulty}] has no chart constant, skipping…`)
+				console.log(
+					`${artist} - ${title} [${difficulty}] has no chart constant, skipping…`,
+				);
 			}
-
-
 		})
 		.on("end", rowCount => {
 			console.log(`Parsed ${rowCount} rows`);
@@ -74,19 +88,21 @@ async function getCSVObject() {
 			const sortedPackList = Object.keys(packList)
 				.sort((a, b) => (packOrder[a] || 999) - (packOrder[b] || 999))
 				.reduce((obj, key) => {
-				obj[key] = packList[key]
-				return obj;
+					obj[key] = packList[key];
+					return obj;
+				}, {});
+
+			writeFile(
+				"./src/lib/assets/charts.json",
+				JSON.stringify(sortedPackList),
+				err => {
+					if (err) {
+						throw err;
+					}
+
+					console.log("Saved charts.json!");
 				},
-				{}
 			);
-
-			writeFile("./src/lib/assets/charts.json", JSON.stringify(sortedPackList), err => {
-				if (err) {
-					throw err;
-				}
-
-				console.log("Saved charts.json!");
-			})
 		});
 }
 
