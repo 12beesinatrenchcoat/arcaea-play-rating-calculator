@@ -16,13 +16,22 @@ jobs:
       - name: 'checking out...'
         uses: actions/checkout@v3
 
+      - name: 'pnpm <3'
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
       - name: 'setting up node…'
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm ci
-      - run: npm run fetch:charts
-      - run: npm run build
+          cache: 'pnpm'
+
+      - name: 'build the thing'
+        run: |
+          pnpm i
+          pnpm fetch:charts
+          pnpm build
 
       - name: 'deploy!'
         uses: peaceiris/actions-gh-pages@v3
