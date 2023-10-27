@@ -9,7 +9,7 @@
 	interface Song {
 		artist: string;
 		pack: string;
-		side: "Light" | "Conflict" | "Colorless";
+		side: 'Light' | 'Conflict' | 'Colorless';
 		version: string;
 		difficulties: {
 			past?: Difficulty;
@@ -19,7 +19,7 @@
 		};
 	}
 
-	import packs from "$lib/assets/charts.json";
+	import packs from '$lib/assets/charts.json';
 
 	// Position of point on graph.
 	export let x: string;
@@ -31,50 +31,49 @@
 		blue: [0, 0],
 		green: [0, 0],
 		purple: [0, 0],
-		"purple-deco": [0, 0],
-		"tomato-deco": [0, 0],
+		'purple-deco': [0, 0],
+		'tomato-deco': [0, 0],
 		star1: [0, 0, 0],
 		star2: [0, 0, 0],
 		star3: [0, 0, 0],
 	};
 
-	/**
-	 * Actually a stringified table. [pack: string, songTitle: string]
-	 */
-	export let selectedsong: string;
-	let selectedDifficulty: "past" | "present" | "future" | "beyond";
+	/** Actually a stringified table. [pack: string, songTitle: string] */
+	export let selectedSong: string;
+	export let selectedPack: string = 'Arcaea';
+	let selectedDifficulty: 'past' | 'present' | 'future' | 'beyond';
 	export let songTitle =
 		"if you're seeing, this, something probably went wrong";
 	export let song: Song = {
 		artist: "or just wait a bit, maybe it's loading",
-		pack: "whoops",
-		side: "Colorless",
-		version: "-2",
+		pack: 'whoops',
+		side: 'Colorless',
+		version: '-2',
 		difficulties: {},
 	};
 	export let difficulty: Difficulty = {
-		level: "no",
+		level: 'no',
 		notes: 1,
 		constant: 0,
-		charter: "no",
+		charter: 'no',
 	};
 
 	export let score: number;
-	export let grade: "EX+" | "EX" | "AA" | "A" | "B" | "C" | "D";
+	export let grade: 'EX+' | 'EX' | 'AA' | 'A' | 'B' | 'C' | 'D';
 	export let scoreModifier: number;
 	export let pure = 0;
 	export let lost: number;
 
 	export let potentialValue = 0;
 	export let potentialTier:
-		| "blue"
-		| "green"
-		| "purple"
-		| "purple-deco"
-		| "tomato-deco"
-		| "star1"
-		| "star2"
-		| "star3";
+		| 'blue'
+		| 'green'
+		| 'purple'
+		| 'purple-deco'
+		| 'tomato-deco'
+		| 'star1'
+		| 'star2'
+		| 'star3';
 
 	$: lost = difficulty.notes - pure;
 
@@ -96,19 +95,19 @@
 	// Setting grade
 	$: {
 		if (score >= 9.9e6) {
-			grade = "EX+";
+			grade = 'EX+';
 		} else if (score >= 9.8e6) {
-			grade = "EX";
+			grade = 'EX';
 		} else if (score >= 9.5e6) {
-			grade = "AA";
+			grade = 'AA';
 		} else if (score >= 9.2e6) {
-			grade = "A";
+			grade = 'A';
 		} else if (score >= 8.9e6) {
-			grade = "B";
+			grade = 'B';
 		} else if (score >= 8.6e6) {
-			grade = "C";
+			grade = 'C';
 		} else {
-			grade = "D";
+			grade = 'D';
 		}
 	}
 
@@ -126,8 +125,9 @@
 	}
 
 	// Song change!
-	$: if (selectedsong) {
-		const data = JSON.parse(selectedsong) as [
+	$: if (selectedSong) {
+		console.debug(selectedSong);
+		const data = JSON.parse(selectedSong) as [
 			pack: keyof typeof packs,
 			songTitle: string,
 		];
@@ -143,10 +143,10 @@
 		) {
 			// Set difficulty to first difficulty if none chosen
 			selectedDifficulty = Object.keys(difficulties)[0] as
-				| "past"
-				| "present"
-				| "future"
-				| "beyond";
+				| 'past'
+				| 'present'
+				| 'future'
+				| 'beyond';
 		}
 
 		changeDifficulty();
@@ -163,7 +163,7 @@
 				pure = Math.round(oldPercent * difficulty.notes);
 			}
 		}
-	
+
 		calculatePotential();
 
 		// Calculating potential ranks, moving rectangles around
@@ -171,8 +171,8 @@
 			blue: [0, 3.5],
 			green: [3.5, 7.0],
 			purple: [7.0, 10.0],
-			"purple-deco": [10.0, 11.0],
-			"tomato-deco": [11.0, 12.0],
+			'purple-deco': [10.0, 11.0],
+			'tomato-deco': [11.0, 12.0],
 			star1: [12.0, 12.5],
 			star2: [12.5, 13.0],
 			star3: [13.0, 99.0],
@@ -182,9 +182,8 @@
 			if (modifier >= 1) {
 				return 0.2e6 * (modifier - 1) + 9.8e6;
 			}
-	 
-				return 0.3e6 * modifier + 9.5e6;
-			
+
+			return 0.3e6 * modifier + 9.5e6;
 		}
 
 		Object.keys(pttBounds).forEach((tier: string) => {
@@ -222,11 +221,11 @@
 	 */
 	function arcaeaScoreFormat(score: number) {
 		score = Number(score);
-		let output = score.toLocaleString("en-UK", {
+		let output = score.toLocaleString('en-UK', {
 			maximumFractionDigits: 0,
 			minimumIntegerDigits: 8,
 		});
-		output = output.replaceAll(",", "'");
+		output = output.replaceAll(',', "'");
 		return output;
 	}
 
@@ -241,20 +240,20 @@
 		);
 		potentialTier =
 			potentialValue >= 13.0
-				? "star3"
+				? 'star3'
 				: potentialValue >= 12.5
-				? "star2"
+				? 'star2'
 				: potentialValue >= 12.0
-				? "star1"
+				? 'star1'
 				: potentialValue >= 11.0
-				? "tomato-deco"
+				? 'tomato-deco'
 				: potentialValue >= 10.0
-				? "purple-deco"
+				? 'purple-deco'
 				: potentialValue >= 7.0
-				? "purple"
+				? 'purple'
 				: potentialValue >= 3.5
-				? "green"
-				: "blue";
+				? 'green'
+				: 'blue';
 	}
 </script>
 
@@ -265,9 +264,9 @@
 <svelte:window on:load={changeDifficulty} />
 
 <h1>Arcaea Play Rating Calculator</h1>
-<a href="https://github.com/12beesinatrenchcoat/arcaea-potential-calculator"
-	>Source Code</a
->
+<a href="https://github.com/12beesinatrenchcoat/arcaea-potential-calculator">
+	Source Code
+</a>
 <a href="https://arcaea.fandom.com/">Arcaea Community Wiki</a>
 <p>
 	This is a fanmade project. It is unaffiliated with Arcaea and lowiro. Arcaea
@@ -278,14 +277,18 @@
 <div class="two-column">
 	<div id="select-menu" class="flow">
 		<label>
+			pack
+			<select id="pack-select" bind:value={selectedPack}>
+				{#each Object.keys(packs) as pack}
+					<option value={pack}>{pack}</option>
+				{/each}
+			</select>
+		</label>
+		<label>
 			song
-			<select id="song-select" bind:value={selectedsong}>
-				{#each Object.entries(packs) as [pack, songs]}
-					<optgroup label={pack}>
-						{#each Object.keys(songs) as song}
-							<option value={`["${pack}","${song}"]`}>{song}</option>
-						{/each}
-					</optgroup>
+			<select id="song-select" bind:value={selectedSong}>
+				{#each Object.keys(packs[selectedPack]) as song}
+					<option value={`["${selectedPack}","${song}"]`}>{song}</option>
 				{/each}
 			</select>
 		</label>
@@ -298,7 +301,7 @@
 					name="difficulty"
 					data-level={song.difficulties.past
 						? song.difficulties.past.level
-						: ""}
+						: ''}
 					value="past"
 					disabled={!song.difficulties.past}
 				/>
@@ -312,7 +315,7 @@
 					name="difficulty"
 					data-level={song.difficulties.present
 						? song.difficulties.present.level
-						: ""}
+						: ''}
 					value="present"
 					disabled={!song.difficulties.present}
 				/>
@@ -326,7 +329,7 @@
 					name="difficulty"
 					data-level={song.difficulties.future
 						? song.difficulties.future.level
-						: ""}
+						: ''}
 					value="future"
 					disabled={!song.difficulties.future}
 				/>
@@ -340,7 +343,7 @@
 					name="difficulty"
 					data-level={song.difficulties.beyond
 						? song.difficulties.beyond.level
-						: ""}
+						: ''}
 					value="beyond"
 					disabled={!song.difficulties.beyond}
 				/>
@@ -356,7 +359,7 @@
 		</div>
 		<div id="diff-info">
 			<p id="difficulty" class={selectedDifficulty}>
-				{(selectedDifficulty || "").toUpperCase()}
+				{(selectedDifficulty || '').toUpperCase()}
 			</p>
 			<p>
 				Level: {difficulty.level} (constant {difficulty.constant.toFixed(1)})
@@ -519,16 +522,16 @@
 	/>
 	<rect
 		id="purple-deco"
-		x={pttPosBounds["purple-deco"][0]}
+		x={pttPosBounds['purple-deco'][0]}
 		y="0"
-		width={pttPosBounds["purple-deco"][1]}
+		width={pttPosBounds['purple-deco'][1]}
 		height="70"
 	/>
 	<rect
 		id="tomato-deco"
-		x={pttPosBounds["tomato-deco"][0]}
+		x={pttPosBounds['tomato-deco'][0]}
 		y="0"
-		width={pttPosBounds["tomato-deco"][1]}
+		width={pttPosBounds['tomato-deco'][1]}
 		height="70"
 	/>
 	<g>
@@ -539,9 +542,7 @@
 			width={pttPosBounds.star1[1]}
 			height="70"
 		/>
-		<text x={pttPosBounds.star1[2]} y="35" clip-path="url(#star1-clip)"
-			>★</text
-		>
+		<text x={pttPosBounds.star1[2]} y="35" clip-path="url(#star1-clip)">★</text>
 	</g>
 
 	<g>

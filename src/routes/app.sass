@@ -40,6 +40,16 @@ body, .flow
 #select-menu
 	background: #8888
 	padding: 0.5em
+	display: flex
+	flex-direction: column
+
+label
+	display: flex
+	width: 100%
+
+select
+	margin-left: 1ch
+	flex-grow: 1
 
 #difficulty-select
 	display: flex
@@ -71,7 +81,6 @@ input[type="radio"]
 	&::before, &::after
 		display: inline-block
 		position: absolute
-
 
 	&::before
 		content: url('$lib/assets/difficulty-icon.svg')
@@ -192,10 +201,10 @@ $diamond-size: 6rem
 		justify-content: center
 		color: white
 		-webkit-text-stroke: grey 1px
-	
+
 	&[data-tier="blue"]
 		filter: hue-rotate(210deg)
-	
+
 	&[data-tier="green"]
 		filter: hue-rotate(120deg)
 
@@ -227,7 +236,7 @@ $diamond-size: 6rem
 	justify-content: center
 	width: 12rem
 
-.past, #blue 
+.past, #blue
 	--color: #0081d8
 
 .present, #green
