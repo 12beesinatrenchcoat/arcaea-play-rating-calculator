@@ -9,9 +9,9 @@ This project is unofficial and fanmade — Arcaea belongs to lowiro. [Go check i
 # developing
 
 ```bash
-npm ci # install dependencies
-npm run fetch:charts # get chart data
-npm run dev # start vite dev server
+pnpm i # install dependencies
+pnpm run fetch:charts # get chart data
+pnpm run dev # start vite dev server
 ```
 
 Stylesheet is in the [/static](/static) directory, all the important stuff is in the [/src](/src) directory.

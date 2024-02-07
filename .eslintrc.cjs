@@ -8,12 +8,6 @@ module.exports = {
 		'prettier',
 	],
 	plugins: ['@typescript-eslint'],
-	overrides: [
-		{
-			files: ['*.svelte'],
-			processor: 'svelte-eslint-parser',
-		},
-	],
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2021,
