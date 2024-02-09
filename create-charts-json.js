@@ -34,6 +34,7 @@ const packOrder = {
 	'Cytus II Collaboration Chapter 2': 91.1,
 	'Muse Dash Collaboration': 92,
 	'WACCA Collaboration': 93,
+	'WACCA Collaboration Chapter 2': 93.1,
 	'maimai Collaboration': 94,
 	'maimai Collaboration Chapter 2': 94.1,
 	'O.N.G.E.K.I. Collaboration': 95,
